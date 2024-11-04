@@ -1,0 +1,45 @@
+#Openai parameter
+#openai_api_key: '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'
+
+openai_api_key:
+  - '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'
+  - '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'
+  - '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'
+  - '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'
+  - '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'
+  - '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'
+  - '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'
+  
+models:
+  - 'llama3-8b-8192'
+  - 'llama3-8b-8192'
+  - 'llama3-8b-8192'
+  - 'llama3-8b-8192'
+  - 'llama3-8b-8192'
+  - 'llama3-8b-8192'
+  - 'llama3-8b-8192'
+
+
+
+daily_token_limits:
+  - 500000
+  - 500000
+  - 500000
+  - 500000
+  - 500000
+  - 500000
+  - 500000
+
+use_multiple_apis: true  # Enable multi-API usage
+
+# # Primary API configuration
+# openai_api_key: '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'
+
+# # Alternative API configuration
+# alternative_api_key: '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'  # API key for the alternative API
+# alternative_model: 'llama3-8b-8192'  # Model for the alternative API (you can also use the same model if preferred)
+
+# # API switching settings
+# use_alternative_api: true  # Set to true to enable alternative API switch when needed
+# daily_token_limit: 500000  # Daily token limit for the primary API
+

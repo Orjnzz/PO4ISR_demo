@@ -13,7 +13,6 @@ class Request():
         self.total_tokens_used = [0] * len(self.apis)  # Track tokens used for each API
         self.token_log = [[] for _ in range(len(self.apis))]  # Log for each API separately
         self.cumulative_tokens_used = 0  # Track total tokens used across all APIs
-        self.max_retries = 5
 
     def request(self, user, system=None, message=None):
         return self.openai_request(user, system, message)
@@ -26,8 +25,7 @@ class Request():
             content = system + user if system else user
             message = [{"role": "user", "content": content}]
         
-        retries = 0
-        while retries < self.max_retries:
+        while True:
             # Check if current API has exceeded its daily token limit
             if self.total_tokens_used[self.current_api_index] >= self.daily_token_limits[self.current_api_index]:
                 print(f"API {self.current_api_index + 1} reached its daily token limit.")
@@ -65,15 +63,8 @@ class Request():
                 if "rate limit" in str(e).lower():
                     print(f"Rate limit reached for API {self.current_api_index + 1}: {e}. Pausing for cooldown...")
                     time.sleep(360)  # Pause for 1 hour, or adjust as needed
-                    retries += 1
                 else:
-                    delay_secs = 2 ** retries + random.uniform(0, 1)
-                    print(f"Error: {e}. Retrying in {round(delay_secs, 2)} seconds.")
-                    time.sleep(delay_secs)
-                    retries += 1
-
-        print("Max retries reached. Exiting.")
-        return None  # Handle as needed if max retries are reached
+                    print(f"Error: {e}. Retrying...")
 
 
 # class Request():

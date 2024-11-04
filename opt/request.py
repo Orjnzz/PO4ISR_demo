@@ -11,7 +11,6 @@ class Request():
         self.daily_token_limits = config['daily_token_limits']
         self.current_api_index = 0  # Start with the first API
         self.total_tokens_used = [0] * len(self.apis)  # Track tokens used for each API
-        self.token_log = [[] for _ in range(len(self.apis))]  # Log for each API separately
         self.cumulative_tokens_used = 0  # Track total tokens used across all APIs
 
     def request(self, user, system=None, message=None):
@@ -53,18 +52,15 @@ class Request():
                     self.cumulative_tokens_used += tokens_used  # Update cumulative total
                     print(f"Tokens used in this request: {tokens_used}")
                     print(f"Cumulative total tokens used: {self.cumulative_tokens_used}")
-
-                    # Log tokens used for testing
-                    self.token_log[self.current_api_index].append(self.total_tokens_used[self.current_api_index])
                     
                 return response.choices[0].message.content
 
             except Exception as e:
                 if "rate limit" in str(e).lower():
                     print(f"Rate limit reached for API {self.current_api_index + 1}: {e}. Pausing for cooldown...")
-                    time.sleep(360)  # Pause for 1 hour, or adjust as needed
                 else:
                     print(f"Error: {e}. Retrying...")
+
 
 
 # class Request():

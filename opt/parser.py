@@ -8,16 +8,12 @@ def parse_args():
                         help='how the reward is calculated, options: ndcg')
     parser.add_argument('--model', 
                         type=str,
-                        default='llama3-8b-8192',
-                        help='options: llama3-8b-8192, llava-v1.5-7b-4096-preview')
+                        default='meta-llama/Meta-Llama-3.1-70B-Instruct',
+                        help='which model as recommender, options: meta-llama/Meta-Llama-3.1-70B-Instruct')
     # parser.add_argument('--model', 
     #                     type=str,
-    #                     default='gemini 1.5 Flash-8B',
-    #                     help='which model as recommender, options: gemini 1.5 Flash-8B,gemini-1.5-flash')
-    # parser.add_argument('--model', 
-    #                     type=str,
-    #                     default='gpt-3.5-turbo',
-    #                     help='which model as recommender, options: gpt-3.5-turbo')
+    #                     default='llama3-8b-8192',
+    #                     help='options: llama3-8b-8192, llava-v1.5-7b-4096-preview')
     parser.add_argument('--seed', 
                         type=int,
                         default=42,
@@ -29,7 +25,7 @@ def parse_args():
     parser.add_argument('--dataset', 
                         type=str,
                         default='bundle',
-                        help='use which datset: D:/9_Lab/1_Recommendation_Sys/PO4ISR_demo/Dataset/')
+                        help='use which datset: bundle/games/ml-1m')
     parser.add_argument('--train_num', 
                         type=int,
                         default=50,

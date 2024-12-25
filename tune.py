@@ -5,10 +5,11 @@ import random
 
 from tqdm import tqdm
 from opt.config import init_config
-from opt.request import Request
+# from opt.request import Request
 from opt.reward import Reward
 from opt.improve import Improve
 from opt.select import Select
+from opt.deepinfra_api import Request
 
 
 def generate_argmax_prompt(beam_candidate, val_data, reward_model, result_table):
@@ -69,9 +70,12 @@ if __name__ == '__main__':
         text_table = None
     print("parameter initialization is complete")
 
-    with open(f"D:/9_Lab/1_Recommendation_Sys/PO4ISR_demo/Dataset/{conf['dataset']}/Text/train_{conf['train_num']}.json", 'r') as json_file:
+    # with open(f"D:/9_Lab/1_Recommendation_Sys/PO4ISR_demo/Dataset/{conf['dataset']}/Text/train_{conf['train_num']}.json", 'r') as json_file:
+    with open(f"D://9_Lab//1_Recommendation_Sys//PO4ISR_demo//PO4ISR//data//demo_train_150_sessions.json", 'r') as json_file:
+
         train_data = json.load(json_file)
-    with open(f"D:/9_Lab/1_Recommendation_Sys/PO4ISR_demo/Dataset/{conf['dataset']}/Text/valid.json", 'r') as json_file:
+    # with open(f"D:/9_Lab/1_Recommendation_Sys/PO4ISR_demo/Dataset/{conf['dataset']}/Text/valid.json", 'r') as json_file:
+    with open(f"D://9_Lab//1_Recommendation_Sys//PO4ISR_demo//PO4ISR//data//demo_valid.json", 'r') as json_file:
         val_data = json.load(json_file)
 
     beam_candidate = []
@@ -87,17 +91,24 @@ if __name__ == '__main__':
     print("==============")
     beam_candidate.append(initial_prompt)
     pbar = tqdm(range(conf['search_depth']))
+    new_candidate = []
     for i in pbar:
         pbar.set_description("search_depth " + str(i+1))
         prompt_candidate = []
         for prompt in beam_candidate:
             # Expand
             prompt_candidate = opt_improve.run(prompt, text_table)
+            print("Prompt candidate: ", prompt_candidate)   
             # Select
-            beam_candidate = opt_select.run(prompt_candidate)
+            new_candidate.append(opt_select.run(prompt_candidate))
+            print("new_candidate: ",new_candidate)
+
     pbar.close()
+    beam_candidate = opt_select.run(new_candidate)
     # Argmax prompt
     new_prompt = generate_argmax_prompt(beam_candidate, val_data, opt_reward, reward_table)
+    print("\nFinal Optimized Prompt:")
+    print(new_prompt)
     if conf['use_wandb']:
         text_table.add_data(" ", prompt, " ", " ", new_prompt)
         run.log({"texts": text_table})

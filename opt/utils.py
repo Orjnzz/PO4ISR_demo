@@ -47,6 +47,7 @@ def extract_edit_prompt(response):
     return result_list 
 
 def load_eval_data(config):
-    with open(f"{config['data_path']}{config['dataset']}/Text/test_seed_{config['seed']}.json", 'r') as json_file:
+    # with open(f"{config['data_path']}{config['dataset']}/Text/test_seed_{config['seed']}.json", 'r') as json_file:
+    with open("D:/9_Lab/1_Recommendation_Sys/PO4ISR_demo/PO4ISR/test_seed_42_4.json", 'r', encoding='utf-8') as json_file:
         test_data = json.load(json_file)
     return test_data

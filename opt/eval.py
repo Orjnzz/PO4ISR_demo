@@ -1,6 +1,7 @@
 from tqdm import tqdm
 from opt.metrics import Metric
-from opt.request import Request
+# from opt.request import Request
+from opt.deepinfra_api import Request
 from opt.utils import extract_item_list
 
 class Eval():

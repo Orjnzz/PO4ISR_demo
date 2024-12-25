@@ -1,6 +1,6 @@
   data_path: 'D:/9_Lab/1_Recommendation_Sys/PO4ISR_demo/Dataset/'
   dataset: 'bundle'
-  search_depth: 2
+  search_depth: 1
   train_num: 50
 
   #Expand parameterwo
@@ -22,10 +22,16 @@
 
   #Wandb parameter
   use_wandb: True
-  wandb_api_key: '8e9ec2f18b4436d72b5145ff56b340185c3246de'
+  #wandb_api_key: '8e9ec2f18b4436d72b5145ff56b340185c3246de'
+  wandb_api_key: 'c3fc75be9d50df460bbe78611fc7f2e8ead4d483'
+
+  
 
   # Evaluate
   metrics: ["hit","map","ndcg"]
-  model: "gpt-3.5-turbo"
+  # model: "gpt-3.5-turbo"
+  model: "meta-llama/Meta-Llama-3.1-70B-Instruct"
   seed: 42
   candidate_size: 20
+  #candidate_size: 100
+

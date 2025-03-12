@@ -70,12 +70,9 @@ if __name__ == '__main__':
         text_table = None
     print("parameter initialization is complete")
 
-    # with open(f"D:/9_Lab/1_Recommendation_Sys/PO4ISR_demo/Dataset/{conf['dataset']}/Text/train_{conf['train_num']}.json", 'r') as json_file:
-    with open(f"D://9_Lab//1_Recommendation_Sys//PO4ISR_demo//PO4ISR//data//demo_train_150_sessions.json", 'r') as json_file:
-
+    with open(f"./data/demo_train_150_sessions.json", 'r') as json_file:
         train_data = json.load(json_file)
-    # with open(f"D:/9_Lab/1_Recommendation_Sys/PO4ISR_demo/Dataset/{conf['dataset']}/Text/valid.json", 'r') as json_file:
-    with open(f"D://9_Lab//1_Recommendation_Sys//PO4ISR_demo//PO4ISR//data//demo_valid.json", 'r') as json_file:
+    with open(f"./data/demo_valid.json", 'r') as json_file:
         val_data = json.load(json_file)
 
     beam_candidate = []
